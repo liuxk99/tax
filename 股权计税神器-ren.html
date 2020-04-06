@@ -1,0 +1,558 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>阿里巴巴集团股权税金计算器</title>
+<style type="text/css">
+*,html,body{padding:0;margin:0;font-family:'微软雅黑'}
+a,img{border:0 none;text-decoration:none;}
+ul,ol,li{list-style:none;}
+*:focus {outline:none;} 
+.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0}
+.clearfloat{zoom:1}
+html,body,#main{width:100%;height:100%;}
+.container{margin:0 auto;position:relative;width:990px;height:100%;}
+#title{width:100%;height:124px;color:#fff;text-align:center;color:#fff;}
+#title .container{border-bottom:1px solid #1abfc9;background:#14c8d3;}
+#headline{font-size:30px;font-weight:bold;padding:25px 0 5px 0;}
+#subtitle {font-size:20px;}
+#submit{background: #f36b6b no-repeat;border-radius:8px;width:110px;height:34px;border:0 none;float:left;margin-left:225px;cursor:pointer;text-align:center;line-height:34px;border:1px solid #f36b6b;font-size:20px;}
+#reset{border-radius:8px;width:110px;height:34px;float:left;margin-left:15px;cursor:pointer;text-align:center;line-height:34px;border:1px solid #fff;font-size:20px;}
+#formDiv{color:#fff;height:460px;}
+#formDiv .container{padding-top:34px;background:url(http://gtms04.alicdn.com/tps/i4/TB16LcwGVXXXXacXVXXMo1AIpXX-963-63.jpg) bottom repeat-x #17cfda;height:424px;}
+#sum{width:555px;;float:left;}
+#sum li{float:left;width:69px;height:20px;font-size:14px;text-align:center;line-height:20px;cursor:pointer;margin:0 12px 8px 0;border:1px solid #fff;border-radius:4px;}
+#sum li.checked{background-color:#ff7e00;border-radius:4px;border:1px solid #ff7e00;}
+.form-div{padding-left:77px;height:347;width:478px;margin-bottom:11px;}
+.form-div label{float:left;width:225px;font-size:15px;}
+.form-div input{width:225px;height:26px;line-height:26px;border:1px solid #baf1f4;padding:0 5px;text-align:right;background:#17cfda;color:#fff;}
+input:disabled{background:#ccc;color:#aaa;}
+.form-div input:-moz-placeholder{color:#ddd;}
+.form-div input:-ms-input-placeholder{color:#ddd;}
+.form-div input::-webkit-input-placeholder{color:#ddd}
+#batchUL{width:249px;height:60px;float:left;}
+#rateTable{margin-left:20px;float:left;background:#15bcc6;border-top:1px solid #74e2e9;border-left:1px solid #74e2e9;width:338px;}
+#rateTable th,#rateTable td{border-bottom:1px solid #74e2e9;border-right:1px solid #74e2e9;}
+#rateTable th{font-size:17px;height:30px;line-height:30px;text-align:center;}
+#rateTable td{font-size:12px;height:38px;line-height:38px;padding-left:7px;}
+#rateTable td.tdRight{text-align:right;padding:0 10px 0 0;}
+#rateTable td.tdCenter{text-align:center;padding:0;}
+#rateTable tr.active{color:#fcff00;}
+
+#result{}
+#result .container{padding:0 57px;width:876px;}
+#resultTitle{background:url(http://gtms03.alicdn.com/tps/i3/TB1R3AFGVXXXXb6XpXXW17vGpXX-37-13.png) center 17px no-repeat;height:35px;text-align:center;font-size:24px;color:#f77474;border-bottom:1px solid #e8e8e8;line-height:31px;padding-top:52px;width:990px;margin-left:-57px;}
+#resultTitle span{display:inline-block;*display:inline;*zoom:1;height:34px;border-bottom:2px solid #f77474;margin-bottom:1px;}
+
+.resultTable{float:left;background:#fff;width:398px;}
+.resultTable td{padding:0 8px;height:34px;line-height:34px;}
+.resultTable tfoot td{font-size:12px;}
+
+.resultTable1{border-top:1px solid #f8d1d1;border-left:1px solid #f8d1d1;}
+.resultTable1 td{border-bottom:1px solid #f8d1d1;border-right:1px solid #f8d1d1;color:#e45f5f;font-size:14px;}
+.resultTable1 td.pink{background:#f9eaea;}
+.resultTable1 td.red{background:#f9a3a3;color:#fff;}
+
+.resultTable2{border-top:1px solid #bee9cc;border-left:1px solid #bee9cc;}
+.resultTable2 td{border-bottom:1px solid #bee9cc;border-right:1px solid #bee9cc;color:#65b17d;font-size:14px;}
+.resultTable2 td.pink{background:#eef8f1;}
+.resultTable2 td.red{background:#8fd0a4;color:#fff;}
+
+.resultTable3{border-top:1px solid #b5d9dc;border-left:1px solid #b5d9dc;}
+.resultTable3 td{border-bottom:1px solid #b5d9dc;border-right:1px solid #b5d9dc;color:#289097;font-size:14px;}
+.resultTable3 td.pink{background:#d0fcff;}
+.resultTable3 td.red{background:#51c8cf;color:#fff;}
+
+
+.table{float:left;margin:40px 20px 0 20px;}
+#total{font-size:18px;color:#f77474;font-weight:bold;margin-top:40px;padding-left:20px;line-height:30px;}
+#total div{float:left;width:50%;}
+#tip{font-size:14px;color:#5e5e5e;padding:15px 0 40px 20px;}
+
+#mask{position:fixed;left:0;top:0;bottom:0;right:0;background:#000;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;display:none;}
+#alert,#alert2{position:fixed;left:50%;top:50%;width:350px;height:120px;margin:-75px 0 0 -175px;background:#fff;text-align:center;font-size:16px;color:#333;border-radius:8px;padding-top:30px;display:none;}
+.confirm{padding:3px 0;height:36px;margin-top:30px;text-align:center;background: #f36b6b no-repeat;border-radius:8px;width:110px;border:1px solid #f36b6b;color:#fff;cursor:pointer;}
+.confirm.closeBtn{background:#ddd;border-color:#ccc;margin-left:20px;}
+#container{width:990px;border-left:2px solid #17cfda;border-right:2px solid #17cfda;margin:0 auto;min-height:100%;background:#fafafa;}
+#formTip{position:absolute;left:77px;top:60px;width:160px;font-size:10px;}
+</style>
+</head>
+<body>
+<div id="main">
+<div id="container">
+	<div id="title">
+    	<div class="container">
+        	<div id="headline">阿里巴巴集团股权税金计算器</div>
+            <div id="subtitle">（上市公司适用）</div>
+        </div>
+    </div>
+    <div id="formDiv">
+    	<div class="container clearfloat">
+            <form id="sum">
+            	<div style="height:285px;">
+                <div class="form-div clearfloat">
+                    <label for="batch">同一自然年度归属批次</label>
+                    <input type="hidden" name="batch" id="batch" value="1" />
+                    <ul id="batchUL">
+                    	<li value="1" class="checked" onclick="radioCheck('batch',this);">第一批</li>
+                        <li value="2" onclick="radioCheck('batch',this);">第二批</li>
+                        <li value="3" onclick="radioCheck('batch',this);">第三批</li>
+                        <li value="4" onclick="radioCheck('batch',this);">第四批</li>
+                        <li value="5" onclick="radioCheck('batch',this);">第五批</li>
+                        <li value="6" onclick="radioCheck('batch',this);">第六批</li>
+                    </ul>
+                </div>
+                <div class="form-div clearfloat" style="margin:18px 0 22px 0;">
+                    <label for="types">股权类型</label>
+                    <input type="hidden" name="types" id="types" value="1" />
+                    <ul id="typesUL">
+                    	<li class="checked" value="1" onclick="radioCheck('types',this);">RSU</li>
+                        <li value="2" onclick="radioCheck('types',this);">OPTION</li>
+                    </ul>
+                </div>
+                <div class="form-div clearfloat">
+                    <label id="countLabel">归属数量</label>
+                    <input id="count" type="text" placeholder="请输入整数的数量" value="" onblur="placeHolder('count');isInteger('count');" onfocus="inputFocus('count');" />
+                </div>
+                <div class="form-div clearfloat" id="priceDiv" style="display:none;" >
+                    <label>OPTION行权价（US$）</label>
+                    <input id="price" type="text" placeholder="请输入最多两位小数的行权价格" value="" onblur="placeHolder('price');isMoney('price');" onfocus="inputFocus('price');" />
+                </div>
+                <div class="form-div clearfloat">
+                    <label id="sharesLabel">归属前一天收盘股价（US$）</label>
+                    <input id="shares" type="text" placeholder="请输入最多两位小数的收盘价格" value="" onblur="placeHolder('shares');isMoney('shares');" onfocus="inputFocus('shares');" />
+                </div>
+                <div class="form-div clearfloat">
+                    <label>汇率（US$:RMB）</label>
+                    <input id="exchangeRate" type="text" placeholder="请输入美元：人民币汇率，如：6.1" value="" onblur="placeHolder('exchangeRate');isRate('exchangeRate');" onfocus="inputFocus('exchangeRate');" />
+                </div>
+            	</div>
+                <div class="form-div clearfloat" style="padding-top:22px;">
+                    <div id="submit" value="" onclick="submitForm();">计算</div>
+                    <div id="reset" value="" onclick="resetForm();">重置</div>
+                </div>
+            </form>
+            <table id="rateTable" cellpadding="0" cellspacing="0">
+            	<thead>
+                	<th colspan="4">个人所得税率表</th>
+                </thead>
+                <tbody>
+                	<tr>
+                    	<td class="tdCenter" width="46" class="tdCenter">级数</td>
+                    	<td class="tdCenter" width="150">应纳税所得额（含税级距）</td>
+                    	<td class="tdCenter" width="60">税率</td>
+                    	<td class="tdCenter">速算扣除数</td>
+                    </tr>
+                	<tr>
+                    	<td class="tdCenter">A1</td>
+                    	<td>不超过3,000</td>
+                    	<td class="tdCenter">3%</td>
+                    	<td class="tdRight">-</td>
+                    </tr>
+                    <tr>
+                    	<td class="tdCenter">A2</td>
+                    	<td>超过3,000至12,000部分</td>
+                    	<td class="tdCenter">10%</td>
+                    	<td class="tdRight">210</td>
+                    </tr>
+                    <tr>
+                    	<td class="tdCenter">A3</td>
+                    	<td>超过12,000至25,000部分</td>
+                    	<td class="tdCenter">20%</td>
+                    	<td class="tdRight">1410</td>
+                    </tr>
+                    <tr>
+                    	<td class="tdCenter">A4</td>
+                    	<td>超过25000至35,000部分</td>
+                    	<td class="tdCenter">25%</td>
+                    	<td class="tdRight">2660</td>
+                    </tr>
+                    <tr>
+                    	<td class="tdCenter">A5</td>
+                    	<td>超过35,000至55,000部分</td>
+                    	<td class="tdCenter">30%</td>
+                    	<td class="tdRight">4410</td>
+                    </tr>
+                    <tr>
+                    	<td class="tdCenter">A6</td>
+                    	<td>超过55,000至80,000部分</td>
+                    	<td class="tdCenter">35%</td>
+                    	<td class="tdRight">7160</td>
+                    </tr>
+                    <tr>
+                    	<td class="tdCenter">A7</td>
+                    	<td>超过80,000部分</td>
+                    	<td class="tdCenter">45%</td>
+                    	<td class="tdRight">15160</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id = "formTip">（备注：同一自然年度内归属的多批股权收益需合并计税）</div>
+    	</div>
+    </div>
+    <div id="result">
+    	<div class="container">
+    		<div id="resultTitle"><span>计算结果</span></div>
+        	<div id="tableDiv" class="clearfloat"></div>
+            <div id="total" class="clearfloat">
+            	<div>本年度累计归属/行权收益（RMB）：<span id="totalIncome">0.00</span></div>
+                <div>总计应缴股票个人所得税（RMB）：<span id="totalTax">0.00</span></div>
+            </div>
+            <div id="tip">* 该计算结果仅供参考，实际应缴个人所得税以公司计算结果为准。</div>
+        </div>
+    </div>
+</div>
+</div>
+<div id="mask"></div>
+<div id="alert">
+	<div id="msg"></div>
+	<input id="confirm" class="confirm" onclick="closeAlert();" value="确定" type="button" />
+</div>
+<div id="alert2">
+	<div id="msg">请重置后再重新计算</div>
+	<input id="reset2" class="confirm" onclick="closeAlert();resetForm();" value="重置" type="button" />
+	<input id="close2" class="confirm closeBtn" onclick="closeAlert();" value="关闭" type="button" />
+</div>
+<script type="text/javascript">
+var income = new Array();
+var tax = new Array();
+var taxType = ["RSU","OPTION"];
+var tableType = ["resultTable1","resultTable2","resultTable3","resultTable1","resultTable2","resultTable3"];
+var tempNum, res = new Array();
+resetForm();
+function radioCheck(str,obj){
+	var n = obj.getAttribute("value");
+	document.getElementById(str).value = n;
+	if(str=="types" && n==1){
+		document.getElementById("priceDiv").style.display = "none";
+		document.getElementById("countLabel").innerHTML = "归属数量";
+		document.getElementById("sharesLabel").innerHTML = "归属前一天收盘股价（US$）";
+	}else if(str=="types" && n==2){
+		document.getElementById("priceDiv").style.display = "block";
+		document.getElementById("countLabel").innerHTML = "行权数量";
+		document.getElementById("sharesLabel").innerHTML = "行权前一天收盘股价（US$）";	
+	}else if(str=="batch"){
+		document.getElementById("count").value = "";
+		document.getElementById("price").value = "";
+		document.getElementById("shares").value = "";
+		document.getElementById("exchangeRate").value = "";
+		placeHolder('count');
+		placeHolder('price');
+		placeHolder('shares');
+		placeHolder('exchangeRate');
+		if(n < income.length){
+			document.getElementById("alert2").setAttribute("style","display:block");
+			document.getElementById("mask").setAttribute("style","display:block");
+		}
+	}
+	var temp = obj.parentNode.getElementsByTagName("li");
+	for(var i=0; i<temp.length; i++){
+		temp[i].removeAttribute("class");
+	}
+	obj.setAttribute("class","checked");
+}
+function submitForm(){
+	var n = tax.length;
+	var batch = parseInt(document.getElementById("batch").value);
+	if(batch-1 > n){
+		document.getElementById("alert").setAttribute("style","display:block");
+		document.getElementById("mask").setAttribute("style","display:block");
+		document.getElementById("msg").innerHTML = "请先完成之前所有批次税金的计算！";
+	}else{
+		var temp1 = 0;temp2 = 0;
+		for(var i=0; i<(batch-1); i++){
+			temp1 += income[i];
+			temp2 += tax[i];
+		}
+		var type = parseInt(document.getElementById("types").value);
+		var count = parseInt(document.getElementById("count").value);
+		var shares = parseFloat(document.getElementById("shares").value);
+		var exchangeRate = parseFloat(document.getElementById("exchangeRate").value);
+		var price = 0,rate,reduction;
+		if(type == 2){
+			price = document.getElementById("price").value;
+		}
+		var r1 = Math.round(count*(shares-price)*exchangeRate*100)/100 + temp1;
+		var tr = document.getElementById("rateTable").getElementsByTagName("tr");
+		for(var i=0; i<tr.length; i++){
+			tr[i].removeAttribute("class");
+		}
+		if(r1/12 <= 3000){
+			rate = 0.03;
+			reduction = 0;
+			tr[2].setAttribute("class","active");
+		}else if(r1/12 > 3000 && r1/12 <=12000){
+			rate = 0.10;
+			reduction = 210;
+			tr[3].setAttribute("class","active");
+		}else if(r1/12 > 12000 && r1/12 <=25000){
+			rate = 0.20;
+			reduction = 1410;
+			tr[4].setAttribute("class","active");
+		}else if(r1/12 > 25000 && r1/12 <=35000){
+			rate = 0.25;
+			reduction = 2660;
+			tr[5].setAttribute("class","active");
+		}else if(r1/12 > 35000 && r1/12 <=55000){
+			rate = 0.30;
+			reduction = 4410;
+			tr[6].setAttribute("class","active");
+		}else if(r1/12 > 55000 && r1/12 <=80000){
+			rate = 0.35;
+			reduction = 7160;
+			tr[7].setAttribute("class","active");
+		}else if(r1/12 > 80000){
+			rate = 0.45;
+			reduction = 15160;
+			tr[8].setAttribute("class","active");
+		}
+		var r2 = r1*rate-reduction - temp2;
+
+		if(r2 >= 0){
+			var h = document.getElementById("title").offsetHeight + document.getElementById("formDiv").offsetHeight;
+			document.documentElement.scrollTop = h;
+			document.body.scrollTop = h;
+			income[batch-1] = Math.round(count*(shares-price)*exchangeRate*100)/100;
+			tax[batch-1] = Math.round(r2*100)/100;
+
+			tempNum = Math.round(count*(shares-price)*exchangeRate*100).toString();
+			var len = tempNum.length; max = Math.floor(len/3)-1; res = ""; str2 = "";
+			res = tempNum.substr(len-2,len);
+			tempNum = tempNum.slice(0,len-2);
+			for (var i=0; i<max; i++) {
+				len = tempNum.length;
+				var s = tempNum.slice(len - 3, len);
+				tempNum = tempNum.substr(0, len - 3); 
+				str2 = (',' + s) + str2;
+			};
+			var t1 = tempNum + str2 + "." + res;
+
+			if(r2 == 0){
+				var t2 = "0.00";
+			}else{
+				tempNum = (Math.round(r2*100)).toString();
+				var len = tempNum.length; max = Math.floor(len/3)-1; res = ""; str2 = "";
+				res = tempNum.substr(len-2,len);
+				tempNum = tempNum.slice(0,len-2);
+				for (var i=0; i<max; i++) {
+					len = tempNum.length;
+					var s = tempNum.slice(len - 3, len);
+					tempNum = tempNum.substr(0, len - 3); 
+					str2 = (',' + s) + str2;
+				};
+				var t2 = tempNum + str2 + "." + res;				
+			}
+
+
+			var table = '<table class="resultTable '+tableType[batch-1]+'" cellpadding="0" cellspacing="0">'+
+						'<tbody>'+
+						'    <tr>'+
+						'        <td class="pink" width="185">归属批次</td>'+
+						'        <td>第'+batch+'批</td>'+
+						'    </tr>'+
+						'    <tr>'+
+						'        <td class="pink">股权类型</td>'+
+						'        <td>'+taxType[type-1]+'</td>'+
+						'    </tr>'+
+						'    <tr>'+
+						'        <td class="pink">归属/行权数量</td>'+
+						'        <td>'+count+'</td>'+
+						'    </tr>'+
+						'    <tr>'+
+						'        <td class="red">本批归属/行权收益（RMB）</td>'+
+						'        <td>'+t1+'</td>'+
+						'    </tr>'+
+						'    <tr>'+
+						'        <td class="red">年终奖应缴所得税（RMB）</td>'+
+						'        <td>'+t2+'</td>'+
+						'    </tr>'+              
+						'</tbody>'+
+						'<tfoot>'+
+						'    <tr>'+
+						'        <td>适用税率：'+rate*100+'%</td>'+
+						'        <td>速算扣除数：'+reduction+'</td>'+
+						'    </tr>'+
+						'</tfoot>'+
+						'</table>';
+			if(batch-1 < n){
+				document.getElementById("table"+batch).innerHTML = table;
+				var r0 = r1*rate-reduction*12;
+				for(var l=batch; l<n; l++){
+					r1 += income[l];
+					r0 += tax[l];
+				}
+
+				tempNum = Math.round(r1*100).toString();
+				var len = tempNum.length; max = Math.floor(len/3)-1; res = ""; str2 = "";
+				res = tempNum.substr(len-2,len);
+				tempNum = tempNum.slice(0,len-2);
+				for (var i=0; i<max; i++) {
+					len = tempNum.length;
+					var s = tempNum.slice(len - 3, len);
+					tempNum = tempNum.substr(0, len - 3); 
+					str2 = (',' + s) + str2;
+				};
+				var t3 = tempNum + str2 + "." + res;
+
+				document.getElementById("totalIncome").innerHTML = t3;
+
+				if(r0 == 0){
+					t4 = "0.00";
+				}else{
+					tempNum = (Math.round(r0*100)).toString();
+					var len = tempNum.length; max = Math.floor(len/3)-1; res = ""; str2 = "";
+					res = tempNum.substr(len-2,len);
+					tempNum = tempNum.slice(0,len-2);
+					for (var i=0; i<max; i++) {
+						len = tempNum.length;
+						var s = tempNum.slice(len - 3, len);
+						tempNum = tempNum.substr(0, len - 3); 
+						str2 = (',' + s) + str2;
+					};
+					var t4 = tempNum + str2 + "." + res;
+				}
+				document.getElementById("totalTax").innerHTML = t4;
+			}else{
+				tempNum = Math.round(r1*100).toString();
+				var len = tempNum.length; max = Math.floor(len/3)-1; res = ""; str2 = "";
+				res = tempNum.substr(len-2,len);
+				tempNum = tempNum.slice(0,len-2);
+				for (var i=0; i<max; i++) {
+					len = tempNum.length;
+					var s = tempNum.slice(len - 3, len);
+					tempNum = tempNum.substr(0, len - 3); 
+					str2 = (',' + s) + str2;
+				};
+				var t5 = tempNum + str2 + "." + res;
+				document.getElementById("totalIncome").innerHTML = t5;
+
+				var test = Math.round((r1*rate-reduction*12)*100);
+				if(test == 0){
+					var t6 = "0.00";
+				}else{
+					tempNum = test.toString();
+					var len = tempNum.length; max = Math.floor(len/3)-1; res = ""; str2 = "";
+					res = tempNum.substr(len-2,len);
+					tempNum = tempNum.slice(0,len-2);
+					for (var i=0; i<max; i++) {
+						len = tempNum.length;
+						var s = tempNum.slice(len - 3, len);
+						tempNum = tempNum.substr(0, len - 3); 
+						str2 = (',' + s) + str2;
+					};
+					var t6 = tempNum + str2 + "." + res;
+				}
+				document.getElementById("totalTax").innerHTML = t6;
+
+				var newNode = document.createElement("div");
+				newNode.setAttribute("id","table"+batch);
+				newNode.setAttribute("class","table");
+				newNode.innerHTML = table;
+				document.getElementById("tableDiv").appendChild(newNode);
+				document.getElementById("table"+batch).style.float = "left";
+				document.getElementById("table"+batch).style.margin = "40px 20px 0 20px";
+			}
+		}else{
+			document.getElementById("alert").setAttribute("style","display:block");
+			document.getElementById("mask").setAttribute("style","display:block");
+			document.getElementById("msg").innerHTML = "请检查填写的数据是否正确！";
+		}
+	}
+}
+function resetForm(){
+	tax = [];
+	income = [];
+	var temp1 = document.getElementById("batchUL").getElementsByTagName("li");
+	var temp2 = document.getElementById("typesUL").getElementsByTagName("li");
+	var temp3 = document.getElementById("rateTable").getElementsByTagName("tr");
+	for(var i=0; i<temp1.length; i++){
+		temp1[i].removeAttribute("class");
+	}
+	for(var j=0; j<temp2.length; j++){
+		temp2[j].removeAttribute("class");
+	}
+	for(var k=0; k<temp3.length; k++){
+		temp3[k].removeAttribute("class");
+	}
+	document.getElementById("batchUL").getElementsByTagName("li")[0].setAttribute("class","checked");
+	document.getElementById("typesUL").getElementsByTagName("li")[0].setAttribute("class","checked");
+	document.getElementById("count").value = "";
+	document.getElementById("price").value = "";
+	document.getElementById("priceDiv").style.display = "none";
+	document.getElementById("shares").value = "";
+	document.getElementById("exchangeRate").value = "";
+	document.getElementById("batch").value = "1";
+	document.getElementById("types").value = "1";
+	document.getElementById("tableDiv").innerHTML = "";
+	document.getElementById("totalIncome").innerHTML = "0.00";
+	document.getElementById("totalTax").innerHTML = "0.00";
+	placeHolder('count');
+	placeHolder('price');
+	placeHolder('shares');
+	placeHolder('exchangeRate');	
+}
+function placeHolder(id){
+	var obj = document.getElementById(id);
+	if(navigator.userAgent.indexOf("MSIE")>0){	
+		var ph = obj.getAttribute("placeholder");
+		if(obj.value == ""){
+			obj.value = ph;
+			obj.setAttribute("style","color:#ddd");
+		}else{
+			obj.removeAttribute("style");
+		}
+	}
+}
+function inputFocus(id){
+	var obj = document.getElementById(id);
+	if(navigator.userAgent.indexOf("MSIE")>0){	
+		var ph = obj.getAttribute("placeholder");
+		if(obj.value == ph){
+			obj.value = "";
+			obj.removeAttribute("style");
+		}
+	}
+}
+//验证整数
+function isInteger(id){  
+	var str = document.getElementById(id).value;
+	var regu = /^[-]{0,1}[0-9]{1,}$/;
+	var re = new RegExp(regu);
+	if(re.test(str)){		
+		return true;
+	}else{
+		document.getElementById(id).value = "";
+		return false;
+	}
+}
+//验证带小数的整数，最多n位
+function isMoney(id){
+	var s = document.getElementById(id).value;
+	var regu = "^[0-9]+[\.][0-9]{0,2}$";
+	var re = new RegExp(regu);
+	if(re.test(s) || isInteger(id)){
+		return true;
+	}else{
+		document.getElementById(id).value = "";
+		return false;
+	}
+}
+function isRate(id){
+	var s = document.getElementById(id).value;
+	var regu = "^[0-9]+[\.][0-9]{0,4}$";
+	var re = new RegExp(regu);
+	if(re.test(s) || isInteger(id)){
+		return true;
+	}else{
+		document.getElementById(id).value = "";
+		return false;
+	}
+}
+function closeAlert(){
+	document.getElementById("alert").setAttribute("style","display:none");
+	document.getElementById("alert2").setAttribute("style","display:none");
+	document.getElementById("mask").setAttribute("style","display:none");
+}
+</script>
+</body>
+</html>
